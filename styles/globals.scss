@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import '../components/Input/input.scss';
+@import '../components/AuthBtn/authBtn.scss';
 html,
 body {
   display: flex;
