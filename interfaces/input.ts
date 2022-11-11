@@ -11,4 +11,5 @@ export interface IInput {
   id: string
   onFocus?: React.FocusEventHandler<HTMLInputElement> | undefined
   onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined
+  style: React.CSSProperties
 }

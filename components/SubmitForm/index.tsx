@@ -1,4 +1,4 @@
-import { createRef, useEffect, useRef, useState } from 'react'
+import { createRef, useEffect, useState } from 'react'
 import AuthBtn from '../AuthBtn'
 import Card from '../Card'
 import ElasticTab from '../ElasticTab'
@@ -6,12 +6,10 @@ import Input from '../Input'
 import SubmitBtn from '../SubmitBtn'
 
 const SubmitForm = () => {
-  const errRef = useRef<HTMLParagraphElement>(null)
   const usernameInputRef = createRef<HTMLInputElement>()
 
   const [username, setUsername] = useState('')
   const [validUsername, setValidUsername] = useState(false)
-  const [usernameFocus, setUsernameFocus] = useState(false)
 
   const [password, setPassword] = useState('')
   const [validPassword, setValidPassword] = useState(false)
@@ -19,7 +17,6 @@ const SubmitForm = () => {
 
   const [email, setEmail] = useState('')
   const [validEmail, setValidEmail] = useState(false)
-  const [EmailFocus, setEmailFocus] = useState(false)
 
   const [errMsg, setErrMsg] = useState('')
 
@@ -61,14 +58,20 @@ const SubmitForm = () => {
     setErrMsg('')
   }, [username, password])
 
+  const handlevalidationMessage = () => {
+    if (!username || !email || !password) {
+      return <p></p>
+    }
+  }
+
   let handleSubmit = async () => {
     try {
       let res = await fetch('https://httpbin.org/post', {
         method: 'POST',
         body: JSON.stringify({
-          name: { username },
-          email: { email },
-          password: { password },
+          name: username,
+          email: email,
+          password: password,
         }),
       })
       await res.json()
@@ -100,46 +103,72 @@ const SubmitForm = () => {
           },
         ]}
       />
-      <form>
-        {/* <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'}>
-          {errMsg}
-        </p> */}
-        <Input
-          id="username"
-          ref={usernameInputRef}
-          onChange={(e: any) => setUsername(e.target.value)}
-          name="نام کاربری"
-          icon="/icons/account.png"
-          type="text"
-        />
-        {validUsername ? <p>True</p> : <p>false</p>}
 
-        <Input
-          id="email"
-          name="آدرس ایمیل"
-          icon="/icons/email.png"
-          type="text"
-          onChange={(e: any) => setEmail(e.target.value)}
-          onFocus={() => setEmailFocus(true)}
-          onBlur={() => setEmailFocus(false)}
-        />
-        {validEmail ? <p>True</p> : <p>false</p>}
-        <Input
-          id="password"
-          name="رمز عبور"
-          onChange={(e: any) => setPassword(e.target.value)}
-          icon="/icons/password.png"
-          type="password"
-        />
-        {validPassword ? <p>True</p> : <p>false</p>}
+      <Input
+        id="username"
+        ref={usernameInputRef}
+        onChange={(e: any) => setUsername(e.target.value)}
+        name="نام کاربری"
+        icon="/icons/account.png"
+        type="text"
+        style={
+          !username || validUsername
+            ? { border: '1px solid lightGray' }
+            : { border: '1px solid red' }
+        }
+        onFocus={() => setPasswordFocus(true)}
+        onBlur={() => setPasswordFocus(false)}
+      />
+      <div className="validtation_message">
+        {!validUsername && username && (
+          <p className="invalid">شماره موبایل را درست وارد کنید</p>
+        )}
+      </div>
 
-        <AuthBtn icon="/icons/facebook.png" title="ورود با فیسبوک" />
-        <AuthBtn icon="/icons/google.png" title="ورود با ایمیل" />
-        <div className="bottom_of_card">
-          <span>با ثبت نام قوانین ومقرارات را پذیرفته اید</span>
-          <SubmitBtn onClick={() => handleSubmit()} />
-        </div>
-      </form>
+      <Input
+        id="email"
+        name="آدرس ایمیل"
+        icon="/icons/email.png"
+        type="text"
+        onChange={(e: any) => setEmail(e.target.value)}
+        style={
+          !email || validEmail
+            ? { border: '1px solid lightGray' }
+            : { border: '1px solid red' }
+        }
+      />
+      <div className="validtation_message">
+        {!validEmail && email && (
+          <p className="invalid">ایمیل را درست وارد کنید</p>
+        )}
+      </div>
+      <Input
+        id="password"
+        name="رمز عبور"
+        onChange={(e: any) => setPassword(e.target.value)}
+        icon="/icons/password.png"
+        type="password"
+        style={
+          !password || validPassword
+            ? { border: '1px solid lightGray' }
+            : { border: '1px solid red' }
+        }
+      />
+      <div className="validtation_message">
+        {!validPassword && password && (
+          <p className="invalid">رمز عبور را درست وارد کنید</p>
+        )}
+      </div>
+
+      <AuthBtn icon="/icons/facebook.png" title="ورود با فیسبوک" />
+      <AuthBtn icon="/icons/google.png" title="ورود با ایمیل" />
+      <div className="bottom_of_card">
+        <span>با ثبت نام قوانین ومقرارات را پذیرفته اید</span>
+        <SubmitBtn
+          disabled={validPassword && validUsername ? false : true}
+          onClick={() => handleSubmit()}
+        />
+      </div>
     </Card>
   )
 }

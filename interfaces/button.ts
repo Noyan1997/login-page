@@ -5,4 +5,5 @@ export interface IAuthBtn {
 
 export interface ISubmitBtn {
   onClick: () => void
+  disabled: boolean
 }

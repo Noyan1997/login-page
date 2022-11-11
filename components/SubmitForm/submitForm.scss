@@ -8,7 +8,7 @@
     font-size: 12px;
   }
   :nth-child(2) {
-    width: 100px;
+    width: 112px;
     margin-top: 30px;
     display: flex;
     justify-content: center;
@@ -16,5 +16,18 @@
     span {
       color: white;
     }
+  }
+}
+.validtation_message {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+  margin-right: 7px;
+  .valid {
+    color: green;
+  }
+  .invalid {
+    color: red;
   }
 }

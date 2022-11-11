@@ -6,6 +6,12 @@
 @import '../components/AuthBtn/authBtn.scss';
 @import '../components/SubmitForm/submitForm.scss';
 @import '../components/ElasticTab/elastictab.scss';
+@font-face {
+  font-family: 'iran-yekan-farsi';
+  src: url('../public/font/iranYekanBoldFN.ttf');
+  font-weight: 700;
+  font-display: fallback;
+}
 html,
 body {
   display: flex;
@@ -14,8 +20,7 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'iran-yekan-farsi', serif;
 }
 
 a {
