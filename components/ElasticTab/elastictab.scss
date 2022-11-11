@@ -1,0 +1,55 @@
+#elastic-tab-core-component {
+  position: relative;
+  .elasticTabContainer {
+    height: 40px;
+    margin-bottom: 24px;
+    div {
+      z-index: 1;
+    }
+    background: #d3d3d333;
+
+    border: 1px solid;
+
+    border-image-source: linear-gradient(
+      90deg,
+      #6977f7 -1.25%,
+      #1c2478 103.76%
+    );
+
+    border-radius: 30px;
+    display: inline-flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0 4px;
+  }
+  .tabItem {
+    color: gray;
+    &.active {
+      color: white;
+    }
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    padding: 12px;
+    width: 100%;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .selectedItem {
+    position: absolute;
+    background: #4caf50;
+    box-shadow: 0px 0px 4px rgba(105, 119, 247, 0.83);
+    backdrop-filter: blur(10px);
+
+    /* Note: backdrop-filter has minimal browser support */
+    border-radius: 25px;
+    height: 34px;
+    top: 4px;
+    left: 4px;
+    z-index: 0;
+    left: 110px;
+    transition: all 0.3s ease-in-out;
+  }
+}

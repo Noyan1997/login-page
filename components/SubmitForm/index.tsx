@@ -1,6 +1,7 @@
 import { createRef, useEffect, useRef, useState } from 'react'
 import AuthBtn from '../AuthBtn'
 import Card from '../Card'
+import ElasticTab from '../ElasticTab'
 import Input from '../Input'
 import SubmitBtn from '../SubmitBtn'
 
@@ -85,10 +86,24 @@ const SubmitForm = () => {
 
   return (
     <Card>
+      <ElasticTab
+        data={[
+          {
+            id: '1',
+            isActive: true,
+            name: 'عضویت',
+          },
+          {
+            id: '2',
+            isActive: false,
+            name: 'ثبت نام',
+          },
+        ]}
+      />
       <form>
-        <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'}>
+        {/* <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'}>
           {errMsg}
-        </p>
+        </p> */}
         <Input
           id="username"
           ref={usernameInputRef}
@@ -96,19 +111,9 @@ const SubmitForm = () => {
           name="نام کاربری"
           icon="/icons/account.png"
           type="text"
-          // onFocus={() => setUsernameFocus(true)}
-          // onBlur={() => setUsernameFocus(false)}
         />
         {validUsername ? <p>True</p> : <p>false</p>}
-        {/* <p
-          className={
-            usernameFocus && username && !validUsername
-              ? 'instructions'
-              : 'offscreen'
-          }
-        >
-          ERROR MESSAGE GOES HERE
-        </p> */}
+
         <Input
           id="email"
           name="آدرس ایمیل"
@@ -125,17 +130,9 @@ const SubmitForm = () => {
           onChange={(e: any) => setPassword(e.target.value)}
           icon="/icons/password.png"
           type="password"
-          // onFocus={() => setPasswordFocus(true)}
-          // onBlur={() => setPasswordFocus(false)}
         />
         {validPassword ? <p>True</p> : <p>false</p>}
-        {/* <p
-          className={
-            passwordFocus && !validPassword ? 'instructions' : 'offscreen'
-          }
-        >
-          ERROR MESSAGE GOES HERE
-        </p> */}
+
         <AuthBtn icon="/icons/facebook.png" title="ورود با فیسبوک" />
         <AuthBtn icon="/icons/google.png" title="ورود با ایمیل" />
         <div className="bottom_of_card">
