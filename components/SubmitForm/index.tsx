@@ -13,13 +13,9 @@ const SubmitForm = () => {
 
   const [password, setPassword] = useState('')
   const [validPassword, setValidPassword] = useState(false)
-  const [passwordFocus, setPasswordFocus] = useState(false)
 
   const [email, setEmail] = useState('')
   const [validEmail, setValidEmail] = useState(false)
-
-  const [errMsg, setErrMsg] = useState('')
-
   const validateUsername = (username: string) => {
     const USERNAME_REGEX = /^(09)\d{9}$/
     return USERNAME_REGEX.test(username)
@@ -35,9 +31,9 @@ const SubmitForm = () => {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return EMAIL_REGEX.test(email)
   }
-  useEffect(() => {
-    usernameInputRef.current?.focus()
-  }, [])
+  // useEffect(() => {
+  //   usernameInputRef.current?.focus()
+  // }, [])
 
   useEffect(() => {
     validateUsername(username)
@@ -53,17 +49,6 @@ const SubmitForm = () => {
     validationEmail(email)
     setValidEmail(validationEmail(email))
   }, [email])
-
-  useEffect(() => {
-    setErrMsg('')
-  }, [username, password])
-
-  const handlevalidationMessage = () => {
-    if (!username || !email || !password) {
-      return <p></p>
-    }
-  }
-
   let handleSubmit = async () => {
     try {
       let res = await fetch('https://httpbin.org/post', {
@@ -75,13 +60,6 @@ const SubmitForm = () => {
         }),
       })
       await res.json()
-      // if (res.status === 200) {
-      //   setName('')
-      //   setEmail('')
-      //   setMessage('User created successfully')
-      // } else {
-      //   setMessage('Some error occured')
-      // }
     } catch (err) {
       console.log(err)
     }
@@ -116,8 +94,6 @@ const SubmitForm = () => {
             ? { border: '1px solid lightGray' }
             : { border: '1px solid red' }
         }
-        onFocus={() => setPasswordFocus(true)}
-        onBlur={() => setPasswordFocus(false)}
       />
       <div className="validtation_message">
         {!validUsername && username && (
